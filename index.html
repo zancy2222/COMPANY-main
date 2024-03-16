@@ -85,18 +85,19 @@
       left: 35%; /* Center the popup horizontally */
       transform: translate(-50%, -100%); /* Adjust vertical and horizontal position */
   }
+  
 }
+
 .userPopup {
   display: none;
   position: fixed;
   z-index: 9999;
   left: 50%;
-  top: 50%;
+  top: 58%;
   transform: translate(-50%, -50%);
   background-color: #fff;
-  border: 1px solid #ccc;
+  border: 1px solid #cacaca;
   border-radius: 5px;
-  padding: 20px;
 }
 
 .userPopup .popup-content {
@@ -105,10 +106,13 @@
 
 .userPopup .close-btn {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 5px;
+  left: calc(100% - 30px);
+  color: #FF5400;
+  font-size: 16px;
   cursor: pointer;
 }
+
 
 .userPopup h2 {
   margin-bottom: 20px;
@@ -122,13 +126,117 @@
   margin-bottom: 20px;
 }
 
-.userPopup .btn-group {
-  display: flex;
-  justify-content: space-between;
+.userPopup button.btn-primary {
+  color: #fff;
+  border-color: #FF5400;
 }
 
-.userPopup .btn-group button {
-  flex: 1;
+.userPopup button.btn-primary:hover {
+  background-color: #FF5400;
+}
+
+.userPopup .form-title {
+  background-color: #FFF7EC;
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  position: relative;
+}
+
+.userPopup .form-title h2 {
+  color: #FF5400;
+  font-family: 'Microsoft Sans Serif', sans-serif;
+  font-size: 16px;
+  margin: 0;
+  position: absolute;
+  left: 3%;
+}
+
+.userPopup .form-check-input:checked {
+  background-color: #FF5400;
+}
+
+.userPopup .form-check {
+  margin-bottom: 10px;
+  
+}
+
+
+.userPopups {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border: 1px solid #cacaca;
+  border-radius: 5px;
+}
+
+.userPopups .popup-content {
+  position: relative;
+}
+
+.userPopups .close-btn {
+  position: absolute;
+  top: 5px;
+  right: 20px; /* Adjusted right position */
+  color: #FF5400;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.userPopups h2 {
+  margin-bottom: 20px;
+}
+
+.userPopups form {
+  width: 100%;
+}
+
+.userPopups .form-group {
+  margin-bottom: 20px;
+}
+
+.userPopups button.btn-primary {
+  color: #fff;
+  border-color: #FF5400;
+}
+
+.userPopups button.btn-primary:hover {
+  background-color: #FF5400;
+}
+
+.userPopups .form-title {
+  background-color: #FFF7EC;
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  position: relative;
+}
+
+.userPopups .form-title h2 {
+  color: #FF5400;
+  font-family: 'Microsoft Sans Serif', sans-serif;
+  font-size: 16px;
+  margin: 0;
+  position: absolute;
+  left: 3%;
+}
+
+.userPopups .form-check-input:checked {
+  background-color: #FF5400;
+}
+
+.userPopups .form-check {
+  margin-bottom: 10px;
 }
 
 </style>
@@ -238,35 +346,36 @@
   </div>
 </div>
 
-
-<!-- Add new user pop-up -->
+<!-- Web Viewed FORM -->
 <div class="userPopup" id="userFormPopup">
-  <div class="popup-content" style="width: 499px; height: 593px;">
-    <span class="close-btn" onclick="closeUserFormPopup()">&times;</span>
-    <h2>Add New User</h2>
-    <form>
+  <div class="popup-content" style="width: 400px; height: 500px;">
+    <div class="form-title" style="background-color: #FFF7EC; padding: 5px; display: flex; justify-content: space-between; align-items: center; width: 100%; height: 40px;">
+      <h2 style="color: #FF5400; font-family: 'Microsoft Sans Serif', sans-serif; font-size: 16px; margin: 0;">Add A New User</h2>
+      <span class="close-btn" onclick="closeUserFormPopup()" style="color: #FF5400; font-size: 20px; cursor: pointer;">x</span>
+    </div>
+    <form style="padding: 10px;">
       <div class="form-group">
         <div class="row">
           <div class="col">
-            <label for="assignedTo">Assigned to:</label>
+            <label for="assignedTo" style="margin-bottom: 3px;">Assigned to:</label>
             <input type="text" class="form-control" id="assignedTo">
           </div>
           <div class="col">
-            <label for="username">Username:</label>
+            <label for="username" style="margin-bottom: 3px;">Username:</label>
             <input type="text" class="form-control" id="username">
           </div>
         </div>
       </div>
       <div class="form-group">
-        <label for="email">Email Address:</label>
+        <label for="email" style="margin-bottom: 3px;">Email Address:</label>
         <input type="email" class="form-control" id="email">
       </div>
       <div class="form-group">
-        <label for="password">Password:</label>
+        <label for="password" style="margin-bottom: 3px;">Password:</label>
         <input type="password" class="form-control" id="password">
       </div>
       <div class="form-group">
-        <label for="adminRole">Admin role:</label>
+        <label for="adminRole" style="margin-bottom: 3px;">Admin role:</label>
         <select class="form-select" id="adminRole" disabled>
           <option value="" selected>--None--</option>
           <option value="admin">Admin</option>
@@ -278,37 +387,82 @@
           <div class="col">
             <div class="form-check">
               <input class="form-check-input" type="checkbox" id="superAdmin">
-              <label class="form-check-label" for="superAdmin">User is super admin</label>
+              <label class="form-check-label" for="superAdmin" style="margin-bottom: 3px; font-size: 12px;">User is super admin</label>
             </div>
           </div>
           <div class="col">
             <div class="form-check">
               <input class="form-check-input" type="checkbox" id="disabledUser">
-              <label class="form-check-label" for="disabledUser">User is disabled</label>
+              <label class="form-check-label" for="disabledUser" style="margin-bottom: 3px; font-size: 12px;">User is disabled</label>
             </div>
           </div>
         </div>
       </div>
-      <div class="btn-group" style="margin-top: 20px;">
-        <button type="button" class="btn btn-secondary" onclick="closeUserFormPopup()">Cancel</button>
-        <button type="submit" class="btn btn-primary">Save</button>
+      <!-- Save button -->
+      <div style="display: flex; justify-content: flex-end; margin-top: 5px;">
+        <button type="button" class="btn btn-secondary" style="color: #FF5400; background-color: #FFF; border-color: #FF5400; width: 70px; height: 30px; margin-right: 5px; font-size: 12px;">Cancel</button>
+        <button type="button" class="btn btn-primary" style="background-color: #FF5400; width: 70px; height: 30px; font-size: 12px;">Save</button>
       </div>
     </form>
   </div>
 </div>
 
-
-  <!-- <div class="box d-block d-sm-none" style="margin-top: 20px; margin-bottom: 20px; padding: 15px; border: 1px solid #ccc; border-radius: 1px;">
-    <button style="padding: 10px 20px; background-color: #FF5400; color: white; border: none; border-radius: 5px;">+ Add new User</button>
-    
-    <select class="form-select mt-3" aria-label="Default select example" style="width: 70%;">
-        <option selected>Select Role</option>
-        <option value="1">Admin</option>
-        <option value="2">User</option>
-        <option value="3">Guest</option>
-    </select>
-</div> -->
-
+<!-- Responsive FORM -->
+<div class="userPopups" id="userFormPopups">
+  <div class="popup-content" style="width: 350px; height: 600px;">
+    <div class="form-title" style="background-color: #FFF7EC; padding: 5px; display: flex; justify-content: space-between; align-items: center; width: 100%; height: 40px;">
+      <h2 style="color: #FF5400; font-family: 'Microsoft Sans Serif', sans-serif; font-size: 16px; margin: 0;">Add A New User</h2>
+      <span class="close-btn" onclick="closeUserFormPopups()" style="color: #FF5400; font-size: 20px; cursor: pointer;">x</span>
+    </div>
+    <form style="padding: 10px;">
+      <div class="form-group">
+        <label for="assignedTo" style="margin-bottom: 3px;">Assigned to:</label>
+        <input type="text" class="form-control" id="assignedTo">
+      </div>
+      <div class="form-group">
+        <label for="username" style="margin-bottom: 3px;">Username:</label>
+        <input type="text" class="form-control" id="username">
+      </div>
+      <div class="form-group">
+        <label for="email" style="margin-bottom: 3px;">Email Address:</label>
+        <input type="email" class="form-control" id="email">
+      </div>
+      <div class="form-group">
+        <label for="password" style="margin-bottom: 3px;">Password:</label>
+        <input type="password" class="form-control" id="password">
+      </div>
+      <div class="form-group">
+        <label for="adminRole" style="margin-bottom: 3px;">Admin role:</label>
+        <select class="form-select" id="adminRole" disabled>
+          <option value="" selected>--None--</option>
+          <option value="admin">Admin</option>
+          <option value="user">User</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="superAdmin">
+              <label class="form-check-label" for="superAdmin" style="margin-bottom: 3px; font-size: 12px;">User is super admin</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="disabledUser">
+              <label class="form-check-label" for="disabledUser" style="margin-bottom: 3px; font-size: 12px;">User is disabled</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Save button -->
+      <div style="display: flex; justify-content: flex-end; margin-top: 5px;">
+        <button type="button" class="btn btn-secondary" style="color: #FF5400; background-color: #FFF; border-color: #FF5400; width: 70px; height: 30px; margin-right: 5px; font-size: 12px;">Cancel</button>
+        <button type="button" class="btn btn-primary" style="background-color: #FF5400; width: 70px; height: 30px; font-size: 12px;">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
 
 <div class="container">
     <div class="row">
@@ -316,7 +470,7 @@
           <div class="d-sm-none mb-4">
             <div class="box d-flex flex-column justify-content-start align-items-start" style="margin-bottom: 20px; padding: 15px; border-radius: 1px;">
                 <!-- + Add new User button -->
-                <button style="padding: 10px 20px; background-color: #FF5400; color: white; border: none; border-radius: 5px; margin-bottom: 10px;">+ Add new User</button>
+                <button style="padding: 10px 20px; background-color: #FF5400; color: white; border: none; border-radius: 5px; margin-bottom: 10px;" onclick="openUserFormPopups()">+ Add new User</button>
         
                 <!-- Search box -->
                 <div class="input-group w-75">
@@ -516,6 +670,18 @@ function openUserFormPopup() {
 // Function to close the user form popup
 function closeUserFormPopup() {
   var popup = document.getElementById("userFormPopup");
+  popup.style.display = "none";
+}
+
+// Function to open the user form popup
+function openUserFormPopups() {
+  var popup = document.getElementById("userFormPopups");
+  popup.style.display = "block";
+}
+
+// Function to close the user form popup
+function closeUserFormPopups() {
+  var popup = document.getElementById("userFormPopups");
   popup.style.display = "none";
 }
 

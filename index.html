@@ -96,8 +96,8 @@
   top: 58%;
   transform: translate(-50%, -50%);
   background-color: #fff;
-  border: 1px solid #cacaca;
-  border-radius: 5px;
+  border: 1px solid #FFF7EC;
+  border-radius: 6px;
 }
 
 .userPopup .popup-content {
@@ -238,6 +238,24 @@
 .userPopups .form-check {
   margin-bottom: 10px;
 }
+/* Overlay styles */
+#overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  z-index: 9998; /* Place the overlay below the popup but above other content */
+}
+
+.userPopup,
+.userPopups {
+  position: fixed;
+  z-index: 9999;
+  /* Your existing styles for popups */
+}
 
 </style>
 </head>
@@ -346,9 +364,11 @@
   </div>
 </div>
 
+<div id="overlay"></div> <!-- Add this div for the overlay -->
+
 <!-- Web Viewed FORM -->
 <div class="userPopup" id="userFormPopup">
-  <div class="popup-content" style="width: 400px; height: 500px;">
+  <div class="popup-content" style="width: 400px; height: 590px;">
     <div class="form-title" style="background-color: #FFF7EC; padding: 5px; display: flex; justify-content: space-between; align-items: center; width: 100%; height: 40px;">
       <h2 style="color: #FF5400; font-family: 'Microsoft Sans Serif', sans-serif; font-size: 16px; margin: 0;">Add A New User</h2>
       <span class="close-btn" onclick="closeUserFormPopup()" style="color: #FF5400; font-size: 20px; cursor: pointer;">x</span>
@@ -369,6 +389,10 @@
       <div class="form-group">
         <label for="email" style="margin-bottom: 3px;">Email Address:</label>
         <input type="email" class="form-control" id="email">
+      </div>
+      <div class="form-group">
+        <label for="mobileNumber" style="margin-bottom: 3px;">Mobile Number:</label>
+        <input type="tel" class="form-control" id="mobileNumber">
       </div>
       <div class="form-group">
         <label for="password" style="margin-bottom: 3px;">Password:</label>
@@ -409,7 +433,7 @@
 
 <!-- Responsive FORM -->
 <div class="userPopups" id="userFormPopups">
-  <div class="popup-content" style="width: 350px; height: 600px;">
+  <div class="popup-content" style="width: 350px; height: 660px;">
     <div class="form-title" style="background-color: #FFF7EC; padding: 5px; display: flex; justify-content: space-between; align-items: center; width: 100%; height: 40px;">
       <h2 style="color: #FF5400; font-family: 'Microsoft Sans Serif', sans-serif; font-size: 16px; margin: 0;">Add A New User</h2>
       <span class="close-btn" onclick="closeUserFormPopups()" style="color: #FF5400; font-size: 20px; cursor: pointer;">x</span>
@@ -426,6 +450,10 @@
       <div class="form-group">
         <label for="email" style="margin-bottom: 3px;">Email Address:</label>
         <input type="email" class="form-control" id="email">
+      </div>
+      <div class="form-group">
+        <label for="mobileNumber" style="margin-bottom: 3px;">Mobile Number:</label>
+        <input type="tel" class="form-control" id="mobileNumber">
       </div>
       <div class="form-group">
         <label for="password" style="margin-bottom: 3px;">Password:</label>
@@ -661,29 +689,30 @@ function toggleUserPopup() {
 }
 
 
-// Function to open the user form popup
+// Function to open user form popup
 function openUserFormPopup() {
-  var popup = document.getElementById("userFormPopup");
-  popup.style.display = "block";
+  document.getElementById("userFormPopup").style.display = "block";
+  document.getElementById("overlay").style.display = "block"; // Show the overlay
 }
 
-// Function to close the user form popup
+// Function to close user form popup
 function closeUserFormPopup() {
-  var popup = document.getElementById("userFormPopup");
-  popup.style.display = "none";
+  document.getElementById("userFormPopup").style.display = "none";
+  document.getElementById("overlay").style.display = "none"; // Hide the overlay
 }
 
-// Function to open the user form popup
+// Function to open responsive user form popup
 function openUserFormPopups() {
-  var popup = document.getElementById("userFormPopups");
-  popup.style.display = "block";
+  document.getElementById("userFormPopups").style.display = "block";
+  document.getElementById("overlay").style.display = "block"; // Show the overlay
 }
 
-// Function to close the user form popup
+// Function to close responsive user form popup
 function closeUserFormPopups() {
-  var popup = document.getElementById("userFormPopups");
-  popup.style.display = "none";
+  document.getElementById("userFormPopups").style.display = "none";
+  document.getElementById("overlay").style.display = "none"; // Hide the overlay
 }
+
 
 </script>
 

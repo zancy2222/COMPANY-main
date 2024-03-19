@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Data Table</title>
+<!-- Link to Font Awesome for the pencil icon -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<!-- Link to Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+  * {
+    padding: 0;
+    margin: 0;
+  }
+
+  @font-face {
+    font-family: Microsoft Sans Serif;
+    src: url('font/micross.ttf') format('truetype');
+  }
+
+  body {
+    font-family: Microsoft Sans Serif, Arial, sans-serif; /* Specify the font family */
+  }
+
+  /* Custom styles */
+  .search-box {
+    margin-bottom: 20px;
+  }
+  @media (max-width: 576px) {
+    .search-box {
+      width: 100%;
+    }
+    .logo {
+      max-width: 100px; /* Adjust the maximum width for smaller devices */
+    }
+    .dashboard-text {
+      display: none; /* Hide the text "Dashboard" */
+    }
+  }
+  
+/* Popup styles */
+.popup {
+  display: none;
+  position: fixed;
+  background-color: white; /* Set popup color to white */
+  width: 248px;
+  max-height: 218px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  z-index: 1;
+  padding: 10px;
+  top: 50%; /* Place the popup in the center vertically */
+  left: 10px; /* Place the popup 10px from the left */
+  transform: translateY(-50%); /* Adjust vertical position */
+}
+
+.popup-content ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.popup-content ul li {
+  padding: 8px 0;
+  cursor: pointer;
+}
+
+.popup-content ul li:hover {
+  background-color: #ddd;
+}
+
+/* Search box style */
+.search-box {
+  width: 95%;
+  padding: 6px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+/* Media query for phone view */
+@media (max-width: 767px) {
+  .popup {
+      left: 35%; /* Center the popup horizontally */
+      transform: translate(-50%, -100%); /* Adjust vertical and horizontal position */
+  }
+}
+
+</style>
+</head>
+<body class="d-flex" style="flex-direction: column;">
+  <div class="container-fluid" style="margin: 0; font-size: 13px; padding: 0;">
+    <header class="header" style="width: 100%; border-bottom: 1px solid #eee; padding: 17px 0;">
+      <div class="container">
+          <div class="row align-items-center">
+              <div class="col-md-6 col-9 d-flex align-items-center">
+                  <img src="img/zerix.png" alt="Zerix Logo" class="logo">
+              </div>
+              <div class="col-md-6 col-3 d-flex justify-content-end align-items-center">
+                  <span class="welcome me-1" style=" color:#bfc1c5; font-size: 16px;">Welcome,</span>
+                  <span class="admin me-1" style="color: #FF5400; font-size: 16px;">Admin</span>
+                  <i class="fas fa-angle-down admin me-3" style="color: #FF5400;"></i>
+                  <button class="btn btn-dashboard d-flex align-items-center" style="background-color: #FF5400; color: white; font-size: 16px;">
+                      <img src="img/home.png" alt="" style="width: 20px; height: auto; "> 
+                      <span class="dashboard-text">&nbsp;Dashboard</span> <!-- Added class for hiding -->
+                  </button>
+              </div>
+          </div>
+      </div>
+  </header>
+</div>
+  <!-- New Container -->
+  <div class="container-fluid" style="border-bottom: 1px solid #eee; padding: 25px;">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-1" style="display: flex;">
+          <div class="box" style="border-radius: 5px; border: 1px solid #FF5400; padding: 7px; display: flex; gap: 5px; align-items: center;">
+              <img src="img/setting.png" alt="Settings Icon" style="width: 25px;">
+              <p class="text-center" style="color: #FF5400; margin: 0;">Settings</p>
+              <!-- Use Bootstrap's responsive class to hide the angle-down icon on larger screens -->
+              <i class="fas fa-angle-down d-sm-none" style="color: #FF5400;"></i>
+          </div>
+      </div>
+      
+              
+        <div class="col-11 d-flex justify-content-end gap-3" style="box-sizing: border-box;">
+          
+           <!-- Hamburger menu icon for phone-sized screens -->
+           <div class="d-flex d-sm-none align-items-center">
+            <!-- Replace "your-hamburger-icon.svg" with your actual SVG file -->
+            <img src="Hamburger Menu.svg" alt="Hamburger Menu" style="width: 30px; height: 30px;">
+        </div>
+
+          <div class="box d-none d-sm-flex" style="display: flex; flex-direction: column; justify-content: center; align-items: center; border: 1px solid #FF5400; width: 80px; height: 75px; border-radius: 5px; text-align: center;">
+            <img src="img/msg.png" alt="Message Icon" style="object-fit:contain; width: 30px; height: 30px;">
+            <p style="color: #FF5400; margin: 0; font-size: 13px;">Messages</p>
+          </div>
+          <div class="box d-none d-sm-flex" style="display: flex; flex-direction: column; justify-content: center; align-items: center; border: 1px solid #FF5400; width: 80px; height: 75px; border-radius: 5px; text-align: center;">
+              <img src="img/key.png" alt="Keywords Icon" style="object-fit:contain; width: 30px; height: 30px;">
+              <p style="color: #FF5400; margin: 0; font-size: 13px;">Keywords</p>
+          </div>
+          <div class="box d-none d-sm-flex" style="display: flex; flex-direction: column; justify-content: center; align-items: center; border: 1px solid #FF5400; width: 80px; height: 75px; border-radius: 5px; text-align: center;">
+            <img src="img/users.png" alt="Contacts Icon" style="object-fit:contain;width: 30px; height: 30px;">
+            <p style="color: #FF5400; margin: 0; font-size: 13px;">Contacts</p>
+          </div>
+                   <a href="CreateNotif.html" style="text-decoration: none;">
+            <div class="box d-none d-sm-flex" style="display: flex; flex-direction: column; justify-content: center; align-items: center; border: 1px solid #FF5400; width: 80px; height: 75px; border-radius: 5px; text-align: center;">
+                <img src="img/notif.png" alt="Notifications Icon" style="object-fit:contain;width: 30px; height: 30px;">
+                <p style="color: #FF5400; margin: 0; font-size: 13px;">Notifications</p>
+            </div>
+        </a>
+          <div class="box d-none d-sm-flex" style="display: flex; flex-direction: column; justify-content: center; align-items: center; border: 1px solid #FF5400; width: 80px; height: 75px; border-radius: 5px; text-align: center;">
+              <img src="img/report.png" alt="Reports Icon" style="object-fit:contain;width: 30px; height: 30px;">
+              <p style="color: #FF5400; margin: 0; font-size: 13px;">Reports</p>
+          </div>
+          <div class="box d-none d-sm-flex" style="display: flex; flex-direction: column; justify-content: center; align-items: center; border: 1px solid #FF5400; width: 80px; height: 75px; border-radius: 5px; text-align: center;">
+              <img src="img/poll.png" alt="Pollster Icon" style="object-fit:contain;width: 30px; height: 30px;">
+              <p style="color: #FF5400;margin: 0; font-size: 13px;">Pollster</p>
+          </div>
+          <div class="box d-none d-sm-flex" style="display: flex; flex-direction: column; justify-content: center; align-items: center; border: 1px solid #FF5400; width: 80px; height: 75px; border-radius: 5px; text-align: center;">
+              <img src="img/sched.png" alt="Scheduler Icon" style="object-fit:contain;width: 30px; height: 30px;">
+              <p style="color: #FF5400; margin: 0; font-size: 13px;">Scheduler</p>
+          </div> 
+        </div>         
+      </div>
+    </div>    
+  </div>
+    <!-- Navigation bar for larger screens -->
+    <div class="container d-none d-sm-block" style="padding: 25px 0 10px 0; border-bottom: 1px solid #eee;">
+      <ul style="list-style-type: none; margin: 0; padding: 0; display: flex; gap: 50px; font-size: 13px; font-weight: 500;">
+        <li style=" display: flex; justify-content: center; width: 100px; color:#FF5400; border-bottom: 3px solid #FF5400; margin-bottom: -12px;">Users</li>
+        <li>User Groups</li>
+        <li>User Roles</li>
+        <li>System Configuration</li>
+        <li>Logs</li>
+      </ul>
+  </div>
+
+  <div class="container" style="margin-top: 45px; margin-bottom: 25px; padding: 0; padding-left: 15px;">
+    <h1 style="margin: 0; font-size: 27px; cursor: pointer;" onclick="toggleUserPopup()">USERS</h1>
+  </div>
+  
+
+<div id="userPopup" class="popup">
+  <input type="text" placeholder="" class="search-box">
+  <div class="popup-content">
+      <ul>
+          <li>User</li>
+          <li>User Groups</li>
+          <li>User Roles</li>
+          <li>System Configuration</li>
+          <li>Logs</li>
+          <!-- Add more items as needed -->
+      </ul>
+  </div>
+</div>
+
+
+  <!-- <div class="box d-block d-sm-none" style="margin-top: 20px; margin-bottom: 20px; padding: 15px; border: 1px solid #ccc; border-radius: 1px;">
+    <button style="padding: 10px 20px; background-color: #FF5400; color: white; border: none; border-radius: 5px;">+ Add new User</button>
+    
+    <select class="form-select mt-3" aria-label="Default select example" style="width: 70%;">
+        <option selected>Select Role</option>
+        <option value="1">Admin</option>
+        <option value="2">User</option>
+        <option value="3">Guest</option>
+    </select>
+</div> -->
+
+
+<div class="container">
+    <div class="row">
+        <div class="col" style="border: 1px solid #eee; padding: 0; margin: 0; border-radius: 5px;">
+          <div class="d-sm-none mb-4">
+            <div class="box d-flex flex-column justify-content-start align-items-start" style="margin-bottom: 20px; padding: 15px; border-radius: 1px;">
+                <!-- + Add new User button -->
+                <button style="padding: 10px 20px; background-color: #FF5400; color: white; border: none; border-radius: 5px; margin-bottom: 10px;">+ Add new User</button>
+        
+                <!-- Search box -->
+                <div class="input-group w-75">
+                    <span class="input-group-text" style="background-color: white; color: grey;"><i class="fas fa-search"></i></span>
+                    <input type="text" class="form-control" style="border-left: none; color:#bfc1c5;" placeholder="Search Name/Number">
+                </div>
+            </div>
+        </div>
+        
+        
+ <!-- Search box -->
+ <div class="d-none d-sm-flex justify-content-between align-items-center m-4">
+  <div class="input-group w-25">
+      <span class="input-group-text" style="background-color: white; color: grey;"><i class="fas fa-search"></i></span>
+      <input type="text" class="form-control" style="border-left: none; color:#bfc1c5;" placeholder="Search Name/Number">
+  </div>
+  <button class="btn" style="background-color: #ff5400; color: white;" onclick="">+ Add New User</button>
+</div>
+
+
+            <!-- Table -->
+            <div class="table-responsive">
+                <table class="table">
+                    <thead style="background-image: linear-gradient(180deg, #ff8e32, #ed6e2e, #ff5905); color: white;">
+                        <tr>
+                            <th scope="col">                       
+                              <span class="custom-checkbox align-middle text-center;" onclick="changeCheckboxColorALL(this)" style="position: relative; display: inline-block; width: 14px; height: 14px; background-color: white; border: 2px solid #eee; border-radius: 3px;">
+                                <i class="fas fa-check" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 6px; color: transparent;"></i>
+                              </span>
+                            </th>
+                            <th scope="col" class="text-center" style="font-weight: lighter;">Assigned to</th>
+                            <th scope="col" class="text-center" style="font-weight: lighter;">Username</th>
+                            <th scope="col" class="text-center" style="font-weight: lighter;">Email Address</th>
+                            <th scope="col" class="text-center" style="font-weight: lighter;">Status</th>
+                            <th scope="col" class="text-center" style="font-weight: lighter;">Role</th>
+                            <th scope="col" class="text-center" style="font-weight: lighter;">Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody style="border: white;">
+                        <tr style="border-bottom: 1px solid #eee;">
+                          <td class="align-middle">
+                            <span class="custom-checkbox align-middle text-center;" onclick="changeCheckboxColor(this)" style="position: relative; display: inline-block; width: 14px; height: 14px; background-color: transparent; border: 2px solid #eee; border-radius: 3px;">
+                              <i class="fas fa-check" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 6px; color: transparent;"></i>
+                            </span>
+                          </td>                                                  
+                            <td class="text-center align-middle">ANTEALYN</td>
+                            <td class="text-center align-middle">user123455</td>
+                            <td class="text-center align-middle">user123@gmail.com</td>
+                            <td class="text-center align-middle"><button class="btn btn-success" style="font-size: 13px; padding: 0px 5px; background-color: #D9F5F0; border-color: #D9F5F0; color: #00BD9D;">Active</button></td>
+                            <td class="text-center align-middle">Admin</td>
+                            <td class="text-center align-middle">
+                                <div class="dropdown">
+                                  <button class="btn btn-secondary" style="background-color: #CED6DB; border: none; transition: background-color 0.3s;" 
+                                          onmouseover="this.style.backgroundColor='#FFF7EC'; this.querySelector('i').style.color='#FF5400';"
+                                          onmouseout="this.style.backgroundColor='#CED6DB'; this.querySelector('i').style.color='#878A99';"
+                                          type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                      <i class="fas fa-ellipsis-h fa-xs" style="color: #878A99;"></i>
+                                  </button>
+                          
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <li><a class="dropdown-item" href="#">Edit</a></li>
+                                        <li><a class="dropdown-item" href="#">Delete</a></li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #eee;">
+                          <td class="align-middle">
+                            <span class="custom-checkbox align-middle text-center;" onclick="changeCheckboxColor(this)" style="position: relative; display: inline-block; width: 14px; height: 14px; background-color: transparent; border: 2px solid #eee; border-radius: 3px;">
+                              <i class="fas fa-check" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 6px; color: transparent;"></i>
+                            </span>
+                          </td>
+                          <td class="text-center align-middle">ANTEALYN</td>
+                          <td class="text-center align-middle">user123455</td>
+                          <td class="text-center align-middle">user123@gmail.com</td>
+                          <td class="text-center align-middle"><button class="btn btn-success" style="font-size: 13px; padding: 0px 5px; background-color: #D9F5F0; border-color: #D9F5F0; color: #00BD9D;">Active</button></td>
+                          <td class="text-center align-middle">Admin</td>
+                          <td class="text-center align-middle">
+                              <div class="dropdown">
+                                <button class="btn btn-secondary" style="background-color: #CED6DB; border: none; transition: background-color 0.3s;" 
+                                        onmouseover="this.style.backgroundColor='#FFF7EC'; this.querySelector('i').style.color='#FF5400';"
+                                        onmouseout="this.style.backgroundColor='#CED6DB'; this.querySelector('i').style.color='#878A99';"
+                                        type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-ellipsis-h fa-xs" style="color: #878A99;"></i>
+                                </button>
+                                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                      <li><a class="dropdown-item" href="#">Edit</a></li>
+                                      <li><a class="dropdown-item" href="#">Delete</a></li>
+                                  </ul>
+                              </div>
+                          </td>
+                      </tr>
+                      <tr style="border-bottom: 1px solid #eee;">
+                        <td class="align-middle">
+                          <span class="custom-checkbox align-middle text-center;" onclick="changeCheckboxColor(this)" style="position: relative; display: inline-block; width: 14px; height: 14px; background-color: transparent; border: 2px solid #eee; border-radius: 3px;">
+                            <i class="fas fa-check" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 6px; color: transparent;"></i>
+                          </span>
+                        </td>
+                        <td class="text-center align-middle">ANTEALYN</td>
+                        <td class="text-center align-middle">user123455</td>
+                        <td class="text-center align-middle">user123@gmail.com</td>
+                        <td class="text-center align-middle"><button class="btn btn-danger" style="font-size: 12px; padding: 0px 5px; background-color: #FFDDDD; border-color: #FFDDDD; color: #D40000;">Disabled</button></td>
+                        <td class="text-center align-middle">Admin</td>
+                        <td class="text-center align-middle">
+                            <div class="dropdown">
+                              <button class="btn btn-secondary" style="background-color: #CED6DB; border: none; transition: background-color 0.3s;" 
+                                      onmouseover="this.style.backgroundColor='#FFF7EC'; this.querySelector('i').style.color='#FF5400';"
+                                      onmouseout="this.style.backgroundColor='#CED6DB'; this.querySelector('i').style.color='#878A99';"
+                                      type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                  <i class="fas fa-ellipsis-h fa-xs" style="color: #878A99;"></i>
+                              </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <li><a class="dropdown-item" href="#">Edit</a></li>
+                                    <li><a class="dropdown-item" href="#">Delete</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>            
+        </div>
+        <div class="container mt-3" style="margin: 0; padding: 0; display: flex;">
+          <button style="margin-top: 20px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #FF5400; padding: 7px; display: flex; align-items: center; background-color: white; color: #FF5400;">
+              <img style="width: 25px;" src="img/delete.png" alt="">Delete
+          </button>
+      </div>
+      
+    </div>
+</div>
+
+
+
+<!-- Link to Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  function changeCheckboxColor(checkbox) {
+    if (!checkbox.classList.contains('checked')) {
+      checkbox.style.backgroundColor = '#FF5400';
+      checkbox.querySelector('i').style.color = '#fff';
+      checkbox.classList.add('checked');
+      checkbox.style.borderColor = '#FF5400';
+    } else {
+      checkbox.style.backgroundColor = 'transparent';
+      checkbox.querySelector('i').style.color = 'transparent';
+      checkbox.classList.remove('checked');
+      checkbox.style.borderColor = '#EEE';
+    }
+  }
+
+  function changeCheckboxColorALL(checkbox) {
+    if (!checkbox.classList.contains('checked')) {
+      checkbox.style.backgroundColor = '#FF5400';
+      checkbox.querySelector('i').style.color = '#fff';
+      checkbox.classList.add('checked');
+      checkbox.style.borderColor = '#FF5400';
+    } else {
+      checkbox.style.backgroundColor = '#FFF';
+      checkbox.querySelector('i').style.color = 'transparent';
+      checkbox.classList.remove('checked');
+      checkbox.style.borderColor = '#EEE';
+    }
+  }
+
+// Get the popup
+var popup = document.getElementById("userPopup");
+
+// Get the button that opens the popup
+var userButton = document.getElementById("toggleUserButton");
+
+// When the user clicks anywhere outside of the popup, close it
+window.onclick = function(event) {
+  if (event.target == popup) {
+    popup.style.display = "none";
+  }
+}
+
+// Function to toggle the user popup
+function toggleUserPopup() {
+  var popup = document.getElementById("userPopup");
+  if (popup.style.display === "none") {
+    popup.style.display = "block";
+  } else {
+    popup.style.display = "none";
+  }
+}
+</script>
+
+
+
+
+</body>
+</html>
